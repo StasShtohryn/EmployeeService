@@ -10,22 +10,21 @@ using System.Threading.Tasks;
 
 namespace EmployeeService
 {
+    [DataContract]
     public class Employee
     {
+        public Employee()
+        {
+            Subordinates = new List<Employee>();
+        }
+        [DataMember]
         public int Id { get; set; }
+        [DataMember]
         public string Name { get; set; }
+        [DataMember]
         public int? ManagerId { get; set; }
         public bool Enabled { get; set; }
-    }
-
-    public class EmployeeNode
-    {
-        public EmployeeNode()
-        {
-            Subordinates = new List<EmployeeNode>();
-        }
-
-        public Employee Employee { get; set; }
-        public List<EmployeeNode> Subordinates { get; set; }
+        [DataMember]
+        public List<Employee> Subordinates { get; set; }
     }
 }

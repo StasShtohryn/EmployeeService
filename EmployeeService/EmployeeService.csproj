@@ -108,7 +108,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\EmployeeNode.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="EmployeeService.svc.cs">
       <DependentUpon>EmployeeService.svc</DependentUpon>

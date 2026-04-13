@@ -18,7 +18,7 @@ namespace EmployeeService
 
         private readonly EmployeeRepository _repository = new EmployeeRepository();
 
-        public async Task<EmployeeNode> GetEmployeeById(int id)
+        public async Task<Employee> GetEmployeeById(int id)
         {
             var result = await _repository.GetSubtreeAsync(id);
 

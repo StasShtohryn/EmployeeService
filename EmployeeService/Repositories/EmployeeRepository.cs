@@ -20,7 +20,7 @@ namespace EmployeeService
             _connectionString = ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString; ;
         }
 
-        public async Task<EmployeeNode> GetSubtreeAsync(int rootId)
+        public async Task<Employee> GetSubtreeAsync(int rootId)
         {
             var sqlQuery = @"
             with SubTree AS (
@@ -38,7 +38,7 @@ namespace EmployeeService
             order by Level";
 
 
-            var nodesDictionary = new Dictionary<int, EmployeeNode>();
+            var nodesDictionary = new Dictionary<int, Employee>();
 
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -53,8 +53,7 @@ namespace EmployeeService
                         var level = 0;
                         while (await reader.ReadAsync())
                         {
-                            var node = new EmployeeNode();
-                            node.Employee = new Employee()
+                            var employee = new Employee()
                             {
                                 Id = reader.GetInt32(0),
                                 Name = reader.GetString(1),
@@ -65,9 +64,9 @@ namespace EmployeeService
 
                             if (level != 0)
                             {
-                                nodesDictionary[node.Employee.ManagerId.Value].Subordinates.Add(node);
+                                nodesDictionary[employee.ManagerId.Value].Subordinates.Add(employee);
                             }
-                            nodesDictionary[node.Employee.Id] = node;
+                            nodesDictionary[employee.Id] = employee;
                         }
                     }
                 }

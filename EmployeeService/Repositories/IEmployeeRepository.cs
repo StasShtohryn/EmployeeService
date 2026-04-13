@@ -7,7 +7,7 @@ namespace EmployeeService
     public interface IEmployeeRepository
     {
 
-        Task<EmployeeNode> GetSubtreeAsync(int rootId);
+        Task<Employee> GetSubtreeAsync(int rootId);
 
 
 
