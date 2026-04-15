@@ -34,11 +34,6 @@ namespace EmployeeService
         {
             bool found = await _repository.SetEnableAsync(id, enable);
 
-            if (!found)
-                throw new WebFaultException<string>(
-                    string.Format("Employee with ID={0} not found.", id),
-                    HttpStatusCode.NotFound);
-
             return found;
         }
     }
